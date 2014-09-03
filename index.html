@@ -105,21 +105,17 @@
             if(parrot.x > parrot_max){
                 parrot.body.velocity.x = -100;
             }   
-/* bounce sound not working correctly
+
+            //game.physics.arcade.collide(apples, world);
             for(var i = 0;i < apples.children.length;i++){
                 var app = apples.children[i];
-                if(app.y > height - 64 && bounce_snd == true){
-                    bounce_snd = false;
+                if(app.body.onFloor()){
                     console.log("bounce");
                     bounce_audio = game.add.audio('bounce1');
                     bounce_audio.play();
 
-                    setTimeout(function(){
-                        bounce_snd = true;
-                    },100);
                 }
             }
- */
         }
 
         function click(){
@@ -134,6 +130,7 @@
                 var apple = apples.create(x-28, y-28, 'apple');
                 apple.name = 'apple' + apple_num;
                 apple.scale.setTo(.4,.4);
+                game.physics.arcade.enable(apple);
 
                 for(var i = 0; i < sounds.length;i++){
                     sounds[i].stop();
@@ -145,7 +142,6 @@
                 if(apple_num == max_apples){
                     for(var i = 0;i < apples.children.length;i++){
                         var app = apples.children[i];
-                        game.physics.arcade.enable(app);
                         app.body.gravity.set(0, 180);
                         app.body.bounce.set(0.8);
                         app.enableBody = true;
