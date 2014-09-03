@@ -35,6 +35,8 @@
         var parrot_max = -150;
         var parrot;
 
+        var bounce_snd = true;
+
         var game = new Phaser.Game(width, height, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         function preload() {
@@ -70,6 +72,8 @@
 
             game.load.audio('blue_bird', ['res/audio/bbird.mp3','res/audio/bbird.ogg']);
             game.load.audio('parrot', ['res/audio/parrot.mp3','res/audio/parrot.ogg']);
+            game.load.audio('bounce1', ['res/audio/bounce1.mp3','res/audio/bounce1.ogg']);
+
 
         }
 
@@ -100,11 +104,26 @@
 
             if(parrot.x > parrot_max){
                 parrot.body.velocity.x = -100;
-            }    
+            }   
+
+            for(var i = 0;i < apples.children.length;i++){
+                var app = apples.children[i];
+                if(app.y > height - 64 && bounce_snd == true){
+                    bounce_snd = false;
+                    console.log("bounce");
+                    bounce_audio = game.add.audio('bounce1');
+                    bounce_audio.play();
+
+                    setTimeout(function(){
+                        bounce_snd = true;
+                    },100);
+                }
+            }
+ 
         }
 
         function click(){
-            console.log(game.input.x + ":" + game.input.y);
+            //console.log(game.input.x + ":" + game.input.y);
             var x = game.input.x;
             var y = game.input.y;
 
@@ -137,6 +156,8 @@
                         apple_num = 0;
                         for(var i = 0;i < apples.children.length;i++){
                             var app = apples.children[i];
+                            app.x = -100;
+                            app.body.gravity.set(0, -180);
                             app.kill();
                         }
                     },5000);
