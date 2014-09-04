@@ -30,7 +30,7 @@
         var star_audio;
 
         var flower_num = 0;
-        var max_flowers = 5;
+        var max_flowers = 10;
         var flower_audio;
 
         var bbird_max = width + 150;
@@ -76,9 +76,22 @@
             game.load.audio('9_yellow_stars', ['res/audio/stars/09_yellow_stars.mp3','res/audio/stars/09_yellow_stars.ogg']);
             game.load.audio('10_yellow_stars', ['res/audio/stars/10_yellow_stars.mp3','res/audio/stars/10_yellow_stars.ogg']);
 
+            //flower sounds
+            game.load.audio('1_purple_flowers', ['res/audio/flowers/01_purple_flower.mp3','res/audio/flowers/01_purple_flower.ogg']);
+            game.load.audio('2_purple_flowers', ['res/audio/flowers/02_purple_flowers.mp3','res/audio/flowers/02_purple_flowers.ogg']);
+            game.load.audio('3_purple_flowers', ['res/audio/flowers/03_purple_flowers.mp3','res/audio/flowers/03_purple_flowers.ogg']);
+            game.load.audio('4_purple_flowers', ['res/audio/flowers/04_purple_flowers.mp3','res/audio/flowers/04_purple_flowers.ogg']);
+            game.load.audio('5_purple_flowers', ['res/audio/flowers/05_purple_flowers.mp3','res/audio/flowers/05_purple_flowers.ogg']);
+            game.load.audio('6_purple_flowers', ['res/audio/flowers/06_purple_flowers.mp3','res/audio/flowers/06_purple_flowers.ogg']);
+            game.load.audio('7_purple_flowers', ['res/audio/flowers/07_purple_flowers.mp3','res/audio/flowers/07_purple_flowers.ogg']);
+            game.load.audio('8_purple_flowers', ['res/audio/flowers/08_purple_flowers.mp3','res/audio/flowers/08_purple_flowers.ogg']);
+            game.load.audio('9_purple_flowers', ['res/audio/flowers/09_purple_flowers.mp3','res/audio/flowers/09_purple_flowers.ogg']);
+            game.load.audio('10_purple_flowers', ['res/audio/flowers/10_purple_flowers.mp3','res/audio/flowers/10_purple_flowers.ogg']);
+
             game.load.audio('blue_bird', ['res/audio/bbird.mp3','res/audio/bbird.ogg']);
             game.load.audio('parrot', ['res/audio/parrot.mp3','res/audio/parrot.ogg']);
             game.load.audio('bounce1', ['res/audio/bounce1.mp3','res/audio/bounce1.ogg']);
+            game.load.audio('flowers_die', ['res/audio/flowers_die.mp3','res/audio/flowers_die.ogg']);
 
 
         }
@@ -236,7 +249,7 @@
             }
 
 
-            if(y > 625){
+            if(y > 625 && flower_num < max_flowers){
                 flower_num += 1;
                 var flower_x = x - 32;
                 var flower_y = y - 64;
@@ -246,11 +259,25 @@
                 flower.animations.add('grow', [0,1,2,3,4], 10, false);
                 flower.animations.add('die', [4,3,2,1,0], 10, false);
                 flower.animations.play('grow');
+
+                for(var i = 0; i < sounds.length;i++){
+                    sounds[i].stop();
+                }
+
+                flower_audio = game.add.audio(flower_num + '_purple_flowers');
+                sounds.push(flower_audio);
+                flower_audio.play();
+
+
                 if(flower_num == max_flowers){
-                    flower_num = 0;
                     setTimeout(function(){
+                        flower_num = 0;
+                        flowers_die = game.add.audio('flowers_die');
+                        flowers_die.play();
+
                         for(var i = 0;i < flowers.children.length;i++){
                             flower=flowers.children[i];
+                        
                             flower.animations.play('die');
                             setTimeout(function(){
                                 for(var i = 0;i < flowers.children.length;i++){
