@@ -29,6 +29,10 @@
         var max_stars = 5;
         var star_audio;
 
+        var flower_num = 0;
+        var max_flowers = 5;
+        var flower_audio;
+
         var bbird_max = width + 150;
         var bbird;
 
@@ -45,6 +49,8 @@
             game.load.image("star", "res/star.png");
             game.load.image("bbird", "res/blue_bird.png");
             game.load.image("parrot", "res/green_parrot.png");
+
+            game.load.spritesheet('flower', 'res/flower.png', 128, 271);
 
             //red Apple Sounds
             game.load.audio('1_red_apples', ['res/audio/apples/01_red_apple.mp3','res/audio/apples/01_red_apple.ogg']);
@@ -86,6 +92,7 @@
             apples = game.add.group();
             apples_audio = game.add.group();
 
+            flowers = game.add.group();
             stars = game.add.group();
 
             bbird = game.add.sprite(1028, 1028, 'bbird');
@@ -229,6 +236,33 @@
             }
 
 
+            if(y > 625){
+                flower_num += 1;
+                var flower_x = x - 32;
+                var flower_y = y - 64;
+                var flower = flowers.create(flower_x, flower_y, 'flower');
+                //var flower = game.add.sprite(flower_x, flower_y, 'flower');
+                flower.scale.setTo(.4,.4);
+                flower.animations.add('grow', [0,1,2,3,4], 10, false);
+                flower.animations.add('die', [4,3,2,1,0], 10, false);
+                flower.animations.play('grow');
+                if(flower_num == max_flowers){
+                    flower_num = 0;
+                    setTimeout(function(){
+                        for(var i = 0;i < flowers.children.length;i++){
+                            flower=flowers.children[i];
+                            flower.animations.play('die');
+                            setTimeout(function(){
+                                for(var i = 0;i < flowers.children.length;i++){
+                                    flower=flowers.children[i];
+                                    flower.kill();
+                                }
+                            },500);
+                        }
+                    },3000);
+                }
+                
+            }
 
 
             //Set the game to strech and fill the screen
