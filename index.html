@@ -81,7 +81,7 @@
             game.load.audio('9_yellow_stars', ['res/audio/stars/09_yellow_stars.mp3','res/audio/stars/09_yellow_stars.ogg']);
             game.load.audio('10_yellow_stars', ['res/audio/stars/10_yellow_stars.mp3','res/audio/stars/10_yellow_stars.ogg']);
 
-            //flower sounds
+            //purple flower sounds
             game.load.audio('1_purple_flowers', ['res/audio/flowers/01_purple_flower.mp3','res/audio/flowers/01_purple_flower.ogg']);
             game.load.audio('2_purple_flowers', ['res/audio/flowers/02_purple_flowers.mp3','res/audio/flowers/02_purple_flowers.ogg']);
             game.load.audio('3_purple_flowers', ['res/audio/flowers/03_purple_flowers.mp3','res/audio/flowers/03_purple_flowers.ogg']);
@@ -92,6 +92,18 @@
             game.load.audio('8_purple_flowers', ['res/audio/flowers/08_purple_flowers.mp3','res/audio/flowers/08_purple_flowers.ogg']);
             game.load.audio('9_purple_flowers', ['res/audio/flowers/09_purple_flowers.mp3','res/audio/flowers/09_purple_flowers.ogg']);
             game.load.audio('10_purple_flowers', ['res/audio/flowers/10_purple_flowers.mp3','res/audio/flowers/10_purple_flowers.ogg']);
+
+            //orange flower sounds
+            game.load.audio('1_orange_flowers', ['res/audio/flowers/01_orange_flower.mp3','res/audio/flowers/01_orange_flower.ogg']);
+            game.load.audio('2_orange_flowers', ['res/audio/flowers/02_orange_flowers.mp3','res/audio/flowers/02_orange_flowers.ogg']);
+            game.load.audio('3_orange_flowers', ['res/audio/flowers/03_orange_flowers.mp3','res/audio/flowers/03_orange_flowers.ogg']);
+            game.load.audio('4_orange_flowers', ['res/audio/flowers/04_orange_flowers.mp3','res/audio/flowers/04_orange_flowers.ogg']);
+            game.load.audio('5_orange_flowers', ['res/audio/flowers/05_orange_flowers.mp3','res/audio/flowers/05_orange_flowers.ogg']);
+            game.load.audio('6_orange_flowers', ['res/audio/flowers/06_orange_flowers.mp3','res/audio/flowers/06_orange_flowers.ogg']);
+            game.load.audio('7_orange_flowers', ['res/audio/flowers/07_orange_flowers.mp3','res/audio/flowers/07_orange_flowers.ogg']);
+            game.load.audio('8_orange_flowers', ['res/audio/flowers/08_orange_flowers.mp3','res/audio/flowers/08_orange_flowers.ogg']);
+            game.load.audio('9_orange_flowers', ['res/audio/flowers/09_orange_flowers.mp3','res/audio/flowers/09_orange_flowers.ogg']);
+            game.load.audio('10_orange_flowers', ['res/audio/flowers/10_orange_flowers.mp3','res/audio/flowers/10_orange_flowers.ogg']);
 
             game.load.audio('blue_bird', ['res/audio/bbird.mp3','res/audio/bbird.ogg']);
             game.load.audio('parrot', ['res/audio/parrot.mp3','res/audio/parrot.ogg']);
@@ -323,7 +335,7 @@
                     sounds[i].stop();
                 }
 
-                flower_audio = game.add.audio(flower_o_num + '_purple_flowers');
+                flower_audio = game.add.audio(flower_o_num + '_orange_flowers');
                 sounds.push(flower_audio);
                 flower_audio.play();
 
