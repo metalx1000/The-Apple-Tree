@@ -47,6 +47,13 @@
         var game = new Phaser.Game(width, height, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         function preload() {
+            text = game.add.text(game.world.centerX, game.world.centerY, 'Loading', { fill: '#ffffff' });
+            text.anchor.setTo(.5,.5);
+            //  You can listen for each of these events from Phaser.Loader
+            game.load.onLoadStart.add(loadStart, this);
+            game.load.onFileComplete.add(fileComplete, this);
+            game.load.onLoadComplete.add(loadComplete, this);
+
             game.load.image("tree", "res/tree.png");
             game.load.image("apple", "res/apple.png");
             game.load.image("star", "res/star.png");
@@ -372,6 +379,25 @@
         function owl_action(){
             owl_snd = game.add.audio('owl_snd');
             owl_snd.play();
+        }
+
+        function loadStart() {
+
+            text.setText("Loading ...");
+
+        }
+
+        //  This callback is sent the following parameters:
+        function fileComplete(progress, cacheKey, success, totalLoaded, totalFiles) {
+
+            text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
+
+        }
+
+        function loadComplete() {
+
+            game.world.remove(text);
+
         }
 
     </script>
