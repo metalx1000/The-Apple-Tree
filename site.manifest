@@ -3,7 +3,6 @@ CACHE MANIFEST
 # version 1
 ./credit.info
 ./index.html
-./site.manifest
 ./res/flower_purple.png
 ./res/owl.png
 ./res/audio/bounce1.mp3
